@@ -8,6 +8,7 @@
       $data = [
         'title' => 'TraversyMVC',
       ];
+    
      
       $this->view('pages/index', $data);
     }
