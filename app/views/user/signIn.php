@@ -15,11 +15,17 @@
                     
 
                     <div class="mt-7">
-                        <input type="email" placeholder="email" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                        <input type="email" placeholder="email" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['email_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['email']?>">
+                        <?php if (!empty($data["email_err"])) : ?>
+                            <span class="text-red-500 text-sm"><?php echo $data["email_err"] ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mt-7">
-                        <input type="password" placeholder="password" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                        <input type="password" placeholder="password" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['password']?>">
+                        <?php if (!empty($data["password_err"])) : ?>
+                            <span class="text-red-500 text-sm"><?php echo $data["password_err"] ?></span>
+                        <?php endif; ?>
                     </div>
 
                     
