@@ -21,6 +21,8 @@
 			<li><a class="text-sm text-gray-400 hover:text-green-500 hover:font-bold" href="<?php echo URLROOT ?>pages/about">About Us</a></li>
 		</ul>
 		<div class="flex">		
+			<?php if(isset($_SESSION['user_id'])): ?>
+			<span class="hidden lg:flex items-center justify-center text-center text-xl text-black font-bold rounded-xl transition duration-200" href="<?php echo URLROOT ?>user/logOut">welcom <?php echo $_SESSION['name']?> </span>
 			<a class=" hidden lg:flex mr-auto text-3xl font-bold leading-none" href="<?php echo URLROOT ?>dashbaord/">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="55" height="50" viewBox="0 0 256 256" xml:space="preserve">
 	
@@ -38,8 +40,10 @@
 					</g>
 				</svg>
 			</a>
+			<a class="hidden lg:flex items-center justify-center text-center   py-2 px-6 bg-red-500 hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200" href="<?php echo URLROOT ?>user/logOut">logout </a>
+			<?php else: ?>
 			<a class="hidden lg:flex items-center justify-center text-center   py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="<?php echo URLROOT ?>user/signIn">Sign In</a>
-			<!-- <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="">user/signUp">Sign up</a> -->
+			<?php endif;?>
 		</div>
 		<div class="lg:hidden   ">
 			<button class="navbar-burger flex items-center text-blue-600 p-3">
@@ -83,8 +87,12 @@
 			</div>
 			<div class="mt-auto">
 				<div class="pt-6">
-					<a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="<?php echo URLROOT ?>user/signIn">Sign in</a>
-					<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="<?php echo URLROOT ?>user/signUp">Sign Up</a>
+				<?php if(isset($_SESSION['user_id'])){ ?>
+					<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-red-600 hover:bg-red-700  rounded-xl" href="<?php echo URLROOT ?>user/logOut">logout</a>
+					<?php }else{  ?>
+						<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="<?php echo URLROOT ?>user/signIn">Sign In</a>
+						<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="<?php echo URLROOT ?>user/signUp">Sign Up</a>
+						<?php };?>
 				</div>
 				<p class="my-4 text-xs text-center text-gray-400">
 					<span>Copyright © 2021</span>

@@ -29,4 +29,8 @@ for($i=0; $i<9 ;$i++){?>
 <?php };
 ?>
 </div>
+<?php  var_dump($_SESSION);
+?>
+
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

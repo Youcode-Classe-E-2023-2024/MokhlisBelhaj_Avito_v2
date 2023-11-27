@@ -7,22 +7,23 @@
             <div class="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
             <div class="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
             <div class="relative w-full rounded-3xl  px-6 py-4 bg-green-300 shadow-md">
-                <label for="" class="block mt-3 text-sm  text-gray-700 text-center font-bold">
+                <?php flash('signin_success');?>
+                <label for="" class="block mt-3 text-sm  text-gray-700 text-center font-bold  ">
                     Login
                 </label>
-                <form method="#" action="#" class="mt-10">
+                <form  action="<?php echo URLROOT; ?>user/signIn" method="post" class="mt-10">
 
                     
 
                     <div class="mt-7">
-                        <input type="email" placeholder="email" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['email_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['email']?>">
+                        <input type="email" name="email" placeholder="email" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['email_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['email']?>">
                         <?php if (!empty($data["email_err"])) : ?>
                             <span class="text-red-500 text-sm"><?php echo $data["email_err"] ?></span>
                         <?php endif; ?>
                     </div>
 
                     <div class="mt-7">
-                        <input type="password" placeholder="password" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['password']?>">
+                        <input type="password" name="password" placeholder="password" class="mt-1 p-3 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0  <?php echo (!empty($data['password_err'])) ? 'bg-red-500' : ''; ?>" value="<?php echo $data['password']?>">
                         <?php if (!empty($data["password_err"])) : ?>
                             <span class="text-red-500 text-sm"><?php echo $data["password_err"] ?></span>
                         <?php endif; ?>

@@ -75,7 +75,7 @@
 <section class="container mx-auto p-6 font-mono">
   <div class="flex justify-center">
     <span class="text-2xl ">Posts</span>
-    <?php print_r($data)?>
+ 
   </div>
   <div class="flex justify-between items-center p-3">
       <!-- Search form -->
@@ -148,7 +148,7 @@ var inputUsers = document.getElementById("users-search");
 var tableUsers = document.getElementById("tableUsers");
 var rowsUsers = tableUsers.querySelectorAll("tbody tr");
 
-inputUsers.addEventListener("input", function() {
+inputUsers.addEventListener("keyup", function() {
     var searchValue = inputUsers.value.trim().toLowerCase();
 
     rowsUsers.forEach(function(row) {
@@ -169,7 +169,7 @@ var inputPosts = document.getElementById("posts-search");
 var tablePosts = document.getElementById("tablePosts");
 var rowsPosts = tablePosts.querySelectorAll("tbody tr");
 
-inputPosts.addEventListener("input", function() {
+inputPosts.addEventListener("keyup", function() {
     var searchValue = inputPosts.value.trim().toLowerCase();
 
     rowsPosts.forEach(function(row) {
