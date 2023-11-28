@@ -18,8 +18,8 @@ for($i=0; $i<9 ;$i++){?>
       </p>
      
     </div>
-    <a href="#" class="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-     
+    <a href="<?php echo URLROOT?>/posts/show/<?php echo $post->id?>" class="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+  
       MORE</a
     >
   </div>
@@ -29,8 +29,7 @@ for($i=0; $i<9 ;$i++){?>
 <?php };
 ?>
 </div>
-<?php  var_dump($_SESSION);
-?>
+
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

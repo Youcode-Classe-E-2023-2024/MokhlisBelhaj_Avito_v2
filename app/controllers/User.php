@@ -59,22 +59,20 @@ class User extends Controller
         $_SESSION['user_id'] = $user->userId;
         $_SESSION['email'] = $user->email;
         $_SESSION['name'] = $user->name;
+        $_SESSION['role'] = $user->role;
+      
+
         redirect('pages/index',);
     }
     public function logOut(){
         unset($_SESSION['user_id']);
         unset($_SESSION['email']);
         unset($_SESSION['name']);
+        unset($_SESSION['role']);
         session_destroy();
         redirect('user/signIn');
     }
-    public function isLoggedIn(){
-        if(isset($_SESSION['user_id'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
+ 
 
     public function signUp()
     {
