@@ -9,8 +9,13 @@ class Dashbaord extends Controller{
         
     }
  public function index(){
-  
+  if($_SESSION['role']){
   $post=$this->postModel->getpost();
+  }else{
+    $id = $_SESSION['user_id'];
+    $post=$this->postModel->getpostByUserId($id);
+  }
+
 
   $data=[
     'post'=>$post

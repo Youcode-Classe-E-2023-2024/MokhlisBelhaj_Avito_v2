@@ -9,8 +9,10 @@ foreach ($data['post'] as $post);
         <!-- Card 1 -->
         <div class="w-full">
             <div class="bg-cover h-30 lg:h-auto rounded-t-lg lg:rounded-t-none lg:rounded-l text-center" title="<?php echo $post->name ?>">
-                <img class="object-cover w-full h-full rounded-t-lg lg:rounded-t-none lg:rounded-l" src="<?php echo $post->image ?>" alt="">
+                <img class="object-cover w-full h-full rounded-t-lg lg:rounded-t-none lg:rounded-l" src="../../public/img/<?php echo $post->image ?>" alt="<?php echo $post->image ?>">
             </div>
+
+
             <div class="p-4 lg:p-6 bg-white rounded-b-lg lg:rounded-b-none lg:rounded-r">
                 <div class="mb-4">
                     <h2 class="text-gray-900 font-bold text-xl lg:text-2xl mb-2"><?php echo $post->name ?></h2>

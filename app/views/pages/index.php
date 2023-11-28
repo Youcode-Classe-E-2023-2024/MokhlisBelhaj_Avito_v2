@@ -1,12 +1,11 @@
 <?php require APPROOT . '\views\inc\header.php'; ?>
 <?php require APPROOT . '\views\inc\navbar.php'; ?>
 <div class=" flex justify-center  flex-wrap">
-<?php
-for($i=0; $i<9 ;$i++){?>
+
  <?php foreach ($data['post'] as $post) : ?>
 <div class="relative top-20 m-10  flex  w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
   <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="#">
-    <img class="object-cover" src="<?php echo $post->image; ?>" alt="product image" />
+    <img class="object-cover" src="public/img/<?php echo $post->image; ?>" alt="product image" />
   </a>
   <div class="mt-4 px-5 pb-5">
     <a href="#">
@@ -26,8 +25,7 @@ for($i=0; $i<9 ;$i++){?>
 </div>
 <?php endforeach; ?>
 
-<?php };
-?>
+
 </div>
 
 

@@ -53,4 +53,57 @@ public function __construct(){
     $result = $this->db->resultSet();
     return $result;
    }
+   public function getpostById($id){
+  
+    $this->db->query("SELECT * FROM $this->tableName where id = :id");
+    $this->db->bind(':id', $id);
+    $row = $this->db->array();
+        if( $this->db->rowcount() >0 ){
+        
+            return $row;
+        }else{
+             return false;
+        }
+    }
+
+   public function getpostByUserId($id){
+  
+    $this->db->query("SELECT * FROM $this->tableName where user_id = :id");
+    $this->db->bind(':id', $id);
+    $row = $this->db->resultSet();
+        if( $this->db->rowcount() >0 ){
+        }else{
+             return false;
+        }
+    }
+
+  public function addPost($data){
+      $this->db->query("INSERT INTO $this->tableName ( `name`, `image`, `desc`, `prix`, `user_id`) VALUES(:name, :image, :desc,:prix,:user_id)");
+      // Bind values
+      $this->db->bind(':name', $data['name'] );
+        $this->db->bind(':image',$data['image'] );
+        $this->db->bind(':desc',$data['desc'] );
+        $this->db->bind(':prix',$data['prix'] ); 
+        $this->db->bind(':user_id',$_SESSION['user_id']); 
+
+
+      // Execute
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+    public function deletePostById($data){
+        $this->db->query("DELETE FROM  $this->tableName WHERE id=:id");
+        $this->db->bind(':id',$data); 
+        if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
+
+        
+        return true;
+    }
 }
