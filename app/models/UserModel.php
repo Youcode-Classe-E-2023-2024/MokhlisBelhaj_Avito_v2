@@ -91,6 +91,11 @@ class UserModel{
     
 
 
+    public function getUser(){
+        $this->db->query("select userId,name,email,role from $this->tableName ");
+        $result = $this->db->resultSet();
+        return $result;
+    }
     public function getUserByID($id){
         $this->db->query("select name,email from $this->tableName where userId = :id");
         $this->db->bind(':id', $id);
@@ -100,6 +105,28 @@ class UserModel{
         }else{
              return false;
         }
+    }
+    public function deleteuserById($data){
+        $this->db->query("DELETE FROM  $this->tableName WHERE userId=:id");
+        $this->db->bind(':id',$data); 
+        if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
+
+    }
+    public function updateuser($data){
+        $this->db->query("UPDATE $this->tableName SET `name`=:name,`email`=:email WHERE userId=:userId ");
+           $this->db->bind(':name', $data['name']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':userId', $data['userId']);
+            if($this->db->execute()){
+                return true;
+              } else {
+                return false;
+              }
+    
     }
 
    

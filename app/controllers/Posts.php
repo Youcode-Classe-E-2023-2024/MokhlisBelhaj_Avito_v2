@@ -90,89 +90,65 @@ class Posts extends Controller
         }
     }
 
-    public function updPost($id)
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'post') {
-            $post = $this->postModel->getPostById($id); // Assuming you have a method to fetch post data by ID
-
+   
+    public function updatePost($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $post = $this->postModel->getpostById($id);
             $data = [
+                'post' => $post, 
+               'id'=>'',
+                 'name' => $_POST['name'],
                 'desc' => $_POST['desc'],
-                'image' => ($_FILES['image']['name']) ? $_FILES['image']['name'] : $post->image,
+                'image' => $_FILES['image'],
                 'prix' => $_POST['prix'],
             ];
-
-            if (!empty($_POST['name'])) {
-                $data['name'] = $_POST['name'];
+            foreach ($data['post'] as $post);
+            $data['id']= $post->id;
+          
+            if (empty($data['name'])) {
+                $data['name'] = $post->name;
             }
-            if (!empty($_POST['desc'])) {
-                $data['desc'] = $_POST['desc'];
+            if (empty($data['desc'])) {
+                $data['desc'] = $post->desc;
             }
-            // Add validation for other fields if needed
-
-            if (empty($data['name_err']) && empty($data['desc_err']) /* && other validations */) {
-                // Check if a new file is uploaded
+            if (empty($data['prix'])) {
+                $data['prix'] = $post->prix;
+            }
                 if (!empty($_FILES['image']['name'])) {
                     $file_name = $_FILES['image']['name'];
                     $file_tmp = $_FILES['image']['tmp_name'];
                     $file_destination = 'C:\\xampp\\htdocs\\MokhlisBelhaj_Avito_v2\\public\\img\\' . $file_name;
-
                     $data['image'] = $file_name;
-
-                    if (move_uploaded_file($file_tmp, $file_destination)) {
+                    move_uploaded_file($file_tmp, $file_destination);
                     } else {
-                        $data['image'] =  $post->image;
+                        $data['image'] = $post->image;
                     }
-                }
-
-                // Update the post in the database
-                if ($this->postModel->updatePost($data)) {
-                    flash('post_updated', 'Post Updated');
-                    die('test');
-                    redirect('dashbaord/index');
-                } else {
-                    die('Error updating post');
-                }
-            } else {
-                die('Error updating post');
-            }
+                    if($this->postModel->updatePost($data)) {
+                       redirect('dashaord');
+                    }else {
+                        die("Error updating");} 
         } else {
-
-
             // Fetch the existing post data and display the form
-            echo ("10");
-
-            $post = $this->postModel->getPostById($id);
-
-            $data = [
-                'name' => $post->name,
-                'desc' => $post->desc,
-                'image' => $post->image,
-                'prix' => $post->prix,
-                'name_err' => '',
-                'desc_err' => '',
-                'image_err' => '',
-                'prix_err' => '',
-            ];
-            redirect('dashbaord/index');
-            // $this->view('posts/edit', $data);
-        }
-    }
-    public function updatePost($id) {
-        if ($_SERVER['REQUEST_METHOD'] == 'post') {
-            die('hello');
-
-        }
-        else  {
-            
-            
-            // Fetch the existing post data and display the form
-           
             $post = $this->postModel->getpostById($id);
-           
-          
-            redirect('dashbaord/index',$post);
+            $data = [
+                'post' => $post
+            ];
+    
+            $this->view('posts/updat', $data);
+        }
     }
+    public function deletePost() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data=$_POST['id'];
+            if ($this->postModel->deletePostById($data)) {
+               
+                flash('post_deleted', 'Post deleted');
+                redirect('dashbaord/index');
+            } else {
+                die('Error');
+            }
+    } 
+    
 }
 }
 

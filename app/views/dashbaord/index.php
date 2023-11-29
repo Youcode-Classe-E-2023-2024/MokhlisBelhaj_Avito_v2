@@ -3,6 +3,48 @@
 
 <main class=" pt-28 ">
 
+
+  <section class=" w-72 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
+
+
+    <div class="mt-8 px-2 flex justify-center ">
+      <h2 class="text-white font-bold text-2xl tracking-wide"><?php echo $_SESSION['name'] ?></h2>
+    </div>
+    <div class="mt-8 px-2 flex justify-center">
+      <h2 class="text-white font-bold text-2xl tracking-wide"><?php echo $_SESSION['email'] ?></h2>
+    </div>
+    <div class="mt-8 px-2 flex justify-around">
+      <a href="<?php echo URLROOT ?>/User/updatUser/<?php echo $_SESSION['user_id']  ?>">
+        <svg class="h-8 w-8 text-blue-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="6 21 21 6 18 3 3 18 6 21" />
+          <line x1="15" y1="6" x2="18" y2="9" />
+          <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+          <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+        </svg>
+      </a>
+      <form action="<?php echo URLROOT ?>/User/deleteProfile" method="post">
+        <input type="hidden" name="id" value="<?php echo  $_SESSION['user_id']; ?>">
+        <button type='submit'>
+          <svg class="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg></button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- </section> -->
+  <section class="container  mx-auto p-6 font-mono">
+    <div class="flex justify-center">
+      <span class="text-2xl ">profil</span>
+    </div>
+
+  </section>
+
   <?php
   if ($_SESSION['role']) : ?>
     <section class="container  mx-auto p-6 font-mono">
@@ -23,55 +65,58 @@
             </svg>
           </label>
         </form>
-
-
-
-
-
-
       </div>
 
 
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
-          <table id="tableUsers" class="w-full">
+          <table id="tableUsers" class="w-full text-center">
             <thead>
               <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-green-100 uppercase border-b border-gray-600">
+
                 <th class="px-4 py-3">Name</th>
-                <th class="px-4 py-3">Age</th>
-                <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3">Date</th>
+                <th class="px-4 py-3">email</th>
+                <th class="px-4 py-3">role</th>
+                <th class="px-4 py-3">action</th>
+
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
+              <?php foreach ($data['user'] as $user) : ?>
+                <tr class="text-gray-700">
+
+                  <td class="px-4 py-3 border">
+                    <div>
+                      <p class="font-semibold"> <?php echo  $user->name ?></p>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-md font-semibold border"><?php echo  $user->email ?></td>
+                  <td class="px-4 py-3 text-xs border text-center">
+                    <?php if ($user->role > 0) { ?>
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> admin </span>
+                    <?php } else { ?>
+                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> user </span>
+                    <?php } ?>
+                  </td>
+                  <td class="px-4 py-3 text-sm border">
+                    <form action="<?php echo URLROOT ?>/User/deleteUser" method="post">
+                      <input type="hidden" name="id" value="<?php echo $user->userId; ?>">
+                      <button type='submit'>
+                        <svg class="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                        </svg></button>
+                    </form>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
 
 
-                  <p class="font-semibold">Nora</p>
-
+            </tbody>
+          </table>
         </div>
-        </td>
-        <td class="px-4 py-3 text-md font-semibold border">17</td>
-        <td class="px-4 py-3 text-xs border">
-          <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Nnacceptable </span>
-        </td>
-        <td class="px-4 py-3 text-sm border">6/10/2020</td>
-        </tr>
-        <tr class="text-gray-700">
-          <td class="px-4 py-3 border">
-            <p class="font-semibold">Ali</p>
-      </div>
-      </td>
-      <td class="px-4 py-3 border text-md font-semibold">23</td>
-      <td class="px-4 py-3 border text-xs">
-        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-      </td>
-      <td class="px-4 py-3 border text-sm">6/10/2020</td>
-      </tr>
-      </tbody>
-      </table>
-      </div>
       </div>
     </section>
   <?php endif; ?>
@@ -104,7 +149,7 @@
     <?php if (!empty($data['post'])) : ?>
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
-          <table class="w-full">
+          <table class="w-full text-center">
             <thead>
               <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-green-100 uppercase border-b border-gray-600">
                 <th class="px-4 py-3">name</th>
@@ -131,15 +176,15 @@
                   </td>
                   <td class="px-4 py-3 text-sm border"><?php echo $post->prix; ?></td>
                   <td class="px-4 py-3 text-sm border flex justify-around">
-    <a href="<?php echo URLROOT ?>/Posts/updatePost/<?php echo $post->id; ?>" >
-        <svg class="h-8 w-8 text-blue-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <polyline points="6 21 21 6 18 3 3 18 6 21" />
-            <line x1="15" y1="6" x2="18" y2="9" />
-            <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
-            <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
-        </svg>
-              </a>
+                    <a href="<?php echo URLROOT ?>/Posts/updatePost/<?php echo $post->id; ?>">
+                      <svg class="h-8 w-8 text-blue-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <polyline points="6 21 21 6 18 3 3 18 6 21" />
+                        <line x1="15" y1="6" x2="18" y2="9" />
+                        <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+                        <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+                      </svg>
+                    </a>
 
 
                     <form action="<?php echo URLROOT ?>/Posts/deletePost" method="post">
@@ -157,18 +202,7 @@
                   </td>
                 </tr>
               <?php endforeach; ?>
-              <!-- <tr class="text-gray-700">
-            <td class="px-4 py-3 border">
-              <div class="flex items-center text-sm">
-                  <p class="font-semibold">Ali</p>
-              </div>
-            </td>
-            <td class="px-4 py-3 border text-md font-semibold">23</td>
-            <td class="px-4 py-3 border text-xs">
-              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-            </td>
-            <td class="px-4 py-3 border text-sm">6/10/2020</td>
-          </tr> -->
+
             </tbody>
           </table>
         <?php endif;  ?>

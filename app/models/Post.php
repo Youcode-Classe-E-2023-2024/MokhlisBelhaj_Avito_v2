@@ -57,7 +57,7 @@ public function __construct(){
   
     $this->db->query("SELECT * FROM $this->tableName where id = :id");
     $this->db->bind(':id', $id);
-    $row = $this->db->array();
+    $row = $this->db->resultSet();
         if( $this->db->rowcount() >0 ){
             return $row;
         }else{
@@ -71,6 +71,8 @@ public function __construct(){
     $this->db->bind(':id', $id);
     $row = $this->db->resultSet();
         if( $this->db->rowcount() >0 ){
+            return $row;
+
         }else{
              return false;
         }
@@ -101,8 +103,18 @@ public function __construct(){
           } else {
             return false;
           }
-
-        
-        return true;
+    }
+    public function updatePost($data){
+        $this->db->query("UPDATE  $this->tableName SET `name`=:name ,`image`=:image,`desc`=:desc,`prix`=:prix WHERE id=:id");
+        $this->db->bind(':id',$data['id']); 
+        $this->db->bind(':name',$data['name']); 
+        $this->db->bind(':desc',$data['desc']); 
+        $this->db->bind(':prix',$data['prix']); 
+        $this->db->bind(':image',$data['image']); 
+        if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
     }
 }

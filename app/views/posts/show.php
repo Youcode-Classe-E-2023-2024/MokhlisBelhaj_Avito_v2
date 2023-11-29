@@ -2,6 +2,7 @@
 <?php require APPROOT . '\views\inc\navbar.php';
 ?>
 <?php $user = $data['user'];
+
 foreach ($data['post'] as $post);
 ?>
 <div class="container pt-28 pb-4 mx-auto">
@@ -28,6 +29,7 @@ foreach ($data['post'] as $post);
                         
                     </div>
                     <div class="text-black text-2xl font-bold"><?php echo $post->prix ?>$</div>
+                    
                 </div>
             </div>
         </div>

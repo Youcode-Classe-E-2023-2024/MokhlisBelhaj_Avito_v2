@@ -37,12 +37,12 @@ class User extends Controller
                 $loggedInUser = $this->userModel->signIn($data['email'], $data['password']);
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
-                                } else {
+                } else {
                     $data['password_err'] = 'password is incorrect';
                     $this->view('user/signIn', $data);
                 }
             } else {
-                $this->view('user/signIn',$data);
+                $this->view('user/signIn', $data);
             }
         } else {
             $data = [
@@ -53,18 +53,19 @@ class User extends Controller
             ];
             $this->view('user/signIn', $data);
         }
-
     }
-    public function createUserSession($user){
+    public function createUserSession($user)
+    {
         $_SESSION['user_id'] = $user->userId;
         $_SESSION['email'] = $user->email;
         $_SESSION['name'] = $user->name;
         $_SESSION['role'] = $user->role;
-      
+
 
         redirect('pages/index',);
     }
-    public function logOut(){
+    public function logOut()
+    {
         unset($_SESSION['user_id']);
         unset($_SESSION['email']);
         unset($_SESSION['name']);
@@ -72,7 +73,7 @@ class User extends Controller
         session_destroy();
         redirect('user/signIn');
     }
- 
+
 
     public function signUp()
     {
@@ -152,6 +153,63 @@ class User extends Controller
                 'confirm_password_err' => ''
             ];
             $this->view('user/signUp', $data);
+        }
+    }
+    public function deleteUser()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = $_POST['id'];
+            if ($this->userModel->deleteuserById($data)) {
+
+                flash('user_deleted', 'user deleted successfully');
+                redirect('dashbaord/index');
+            } else {
+                die('Error');
+            }
+        }
+    }
+    public function deleteProfile()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = $_POST['id'];
+            if ($this->userModel->deleteuserById($data)) {
+              $this->logOut();
+            } else {
+                die('Error');
+            }
+        }
+    }
+    public function updatUser($id){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'userId' => $_SESSION['user_id'],
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+            ];
+
+
+            if (empty($data['name'])) {
+                $data['name'] = $_SESSION['name'];
+            }
+            if (empty($data['email'])) {
+                $data['email'] = $_SESSION['email'];
+            }
+            if ($this->userModel->updateuser($data)) {
+
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['name'] = $data['name'];
+
+                redirect('Dashbaord');
+            } else {
+
+                die("Error updating");
+            }
+        } else {
+            $this->view('user/updatUser');
         }
     }
 }
