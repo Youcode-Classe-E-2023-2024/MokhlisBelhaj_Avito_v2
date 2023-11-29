@@ -29,25 +29,28 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 
 ## Structure du Projet
 
-app\ 
-    app\config 
-    app\controllers
-    app\helpers
-    app\libraries
-    app\models
-    app\views
-       app\views\dashbaord
-       app\views\inc
-       app\views\pages
-       app\views\posts
-       app\views\user
-       app\.htaccess
-       app\bootstrap.php
-public\
-    public\css
-    public\img
-    public\js
-    public\.htaccess
-    public\index.php
-.htaccess
-README.md
+
+- `app\`
+  - `app\config`
+  - `app\controllers`
+  - `app\helpers`
+  - `app\libraries`
+  - `app\models`
+  - `app\views`
+    - `app\views\dashbaord`
+    - `app\views\inc`
+    - `app\views\pages`
+    - `app\views\posts`
+    - `app\views\user`
+  - `app\.htaccess`
+  - `app\bootstrap.php`
+
+- `public\`
+  - `public\css`
+  - `public\img`
+  - `public\js`
+  - `public\.htaccess`
+  - `public\index.php`
+
+- `.htaccess`
+- `README.md`
