@@ -59,7 +59,6 @@ public function __construct(){
     $this->db->bind(':id', $id);
     $row = $this->db->array();
         if( $this->db->rowcount() >0 ){
-        
             return $row;
         }else{
              return false;

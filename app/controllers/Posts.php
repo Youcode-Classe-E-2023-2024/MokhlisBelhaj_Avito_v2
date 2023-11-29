@@ -169,13 +169,9 @@ class Posts extends Controller
             // Fetch the existing post data and display the form
            
             $post = $this->postModel->getpostById($id);
-            $data = [
-                'post' => $post
-            ];
-            echo'<pre>';
-            print_r($data);
-            echo'</pre>';
-            // redirect('dashbaord/index');
+           
+          
+            redirect('dashbaord/index',$post);
     }
 }
 }
